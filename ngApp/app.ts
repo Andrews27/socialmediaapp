@@ -13,6 +13,12 @@ namespace socialmediaapp {
                 controller: socialmediaapp.Controllers.HomeController,
                 controllerAs: 'controller'
             })
+            .state('post', {
+                url: '/post/:id',
+                templateUrl: '/ngApp/views/post.html',
+                controller: socialmediaapp.Controllers.PostController,
+                controllerAs: 'controller'
+            })
             .state('about', {
                 url: '/about',
                 templateUrl: '/ngApp/views/about.html',
@@ -31,6 +37,6 @@ namespace socialmediaapp {
         $locationProvider.html5Mode(true);
     });
 
-    
+
 
 }

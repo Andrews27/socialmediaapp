@@ -5,11 +5,20 @@ import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as ejs from 'ejs';
+import * as mongoose from 'mongoose';
 
 import routes from './routes/index';
 import users from './routes/users';
+import social from './api/social';
 
 let app = express();
+
+const CONNECTION_STRING = 'mongodb://coolteam1:98765@ds161190.mlab.com:61190/coolteam1app';
+
+mongoose.connect(CONNECTION_STRING)
+  .then(() => console.log('connection established'))
+  .catch((err) => console.log(err));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +37,7 @@ app.use('/api', express.static(path.join(__dirname, 'api')));
 
 app.use('/', routes);
 app.use('/users', users);
-
+app.use('/api/v1/social', social);
 
 // redirect 404 to home for the sake of AngularJS client-side routes
 app.get('/*', function(req, res, next) {
